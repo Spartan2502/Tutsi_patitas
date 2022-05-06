@@ -1,8 +1,9 @@
 function Header() {
     return (
         <>
-        <h1>Desde Header</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Unde dolores exercitationem accusantium repudiandae similique laboriosam atque recusandae, iure quas aliquam aspernatur ipsa sapiente delectus distinctio? Voluptate ratione quod tempore quae!</p>
+        <h1 className="font-black text-5xl text-center md:w-2/3 mx-auto">Seguimiento pacientes{" "}
+        <span className="text-indigo-600">Veterinarias</span>
+        </h1>
         </>
     )
 
