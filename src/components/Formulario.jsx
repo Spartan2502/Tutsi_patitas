@@ -1,24 +1,64 @@
+import { useState, useEffect } from 'react'
+
 
 export default function Formulario() {
+    const [nombre, setNombre] = useState('')
+    const [propietario, setPropietario] = useState('')
+    const [email, setEmail] = useState('')
+    const [fecha, setFecha] = useState('')
+    const [sintomas, setSintomas] = useState('')
+
+    const [error, setError] = useState(false)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        //validacion del formulario 
+        console.log('validando formulario')
+        if ([nombre, propietario, email, fecha, sintomas].includes('')) {
+            console.log('hay almenos un campo vacio')
+            setError(true)
+        } else {
+            console.log('enviando formulario...')
+            setError(false)
+
+        }
+
+    }
+
     return (
-        <div className="md:w-1/2 lg:w-2/5">
+        <div className="md:w-1/2 lg:w-2/5 mx-5">
             <h2 className="font-black text-3xl text-center">Seguimiento pacientes</h2>
 
             <p className="text-xl mt-5 text-center mb-10">
                 Añade pacientes y {" "}
                 <span className="text-indigo-600 font-bold">Administralos</span>
             </p>
-            <form action="" className="bg-white shadow-md rounded-lg py-10 px-5 ">
+
+            <form
+                onSubmit={handleSubmit}
+                action="" className="bg-white shadow-md rounded-lg py-10 px-5 "
+            >
+
+                {/* {error?'Si hay un error':'No hay error'} */}
+                {/* {error && "si hay error"} */}
+                {error && (
+                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-2" role="alert">
+                <p class="font-bold">Todos los campos son obligatorios!!</p>
+              </div>
+                )}
+
                 <div className="mb-5">
                     <label
                         className="block text-gray-700 uppercase font-bold" htmlFor="NombreM">
-                        Mascota
+                        nombre Mascota
                     </label>
                     <input
                         id="NombreM"
                         type="text"
                         placeholder="Nombre de la mascota "
-                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)} />
                 </div>
 
                 <div className="mb-5">
@@ -30,7 +70,9 @@ export default function Formulario() {
                         id="NombreP"
                         type="text"
                         placeholder="Nombre del propietario"
-                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={propietario}
+                        onChange={(e) => setPropietario(e.target.value)} />
                 </div>
 
                 <div className="mb-5">
@@ -42,7 +84,9 @@ export default function Formulario() {
                         id="Email"
                         type="Email"
                         placeholder="Email contacto"
-                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
                 </div>
 
                 <div className="mb-5">
@@ -53,7 +97,9 @@ export default function Formulario() {
                     <input
                         id="Alta"
                         type="date"
-                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md" />
+                        className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
+                        value={fecha}
+                        onChange={(e) => setFecha(e.target.value)} />
                 </div>
 
                 <div className="mb-5">
@@ -65,7 +111,11 @@ export default function Formulario() {
                         id="Sintomas"
                         className="border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md"
                         placeholder="Desribe los sintomas..."
+                        value={sintomas}
+                        onChange={(e) => setSintomas(e.target.value)}
                     />
+
+
                     <input type="submit"
                         className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
                         value="Agregar paciente" />
