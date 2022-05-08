@@ -66,7 +66,7 @@ export default function Formulario({ pacientes, setPacientes }) {
 
                 {/* {error?'Si hay un error':'No hay error'} */}
                 {/* {error && "si hay error"} */}
-                {error && <Error><p> Todos los campos son obligatorios!!!</p></Error>}
+                {error && <Error>Todos los campos son obligatorios!!!</Error>}
 
                 <div className="mb-5">
                     <label
