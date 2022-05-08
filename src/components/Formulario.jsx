@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
+import { Error } from './Error'
 
 
-export default function Formulario() {
+export default function Formulario({ pacientes, setPacientes }) {
     const [nombre, setNombre] = useState('')
     const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
@@ -20,6 +21,21 @@ export default function Formulario() {
         } else {
             console.log('enviando formulario...')
             setError(false)
+            //objeto de paciente
+            const objetoPaciente = {
+                nombre, propietario, email, fecha, sintomas
+            }
+            console.log(objetoPaciente)
+            //guardar los pacientes
+            setPacientes([...pacientes, objetoPaciente])
+
+            //reiniciar el fomr
+            setNombre('')
+            setPropietario('')
+            setEmail('')
+            setFecha('')
+            setSintomas('')
+
 
         }
 
@@ -41,11 +57,7 @@ export default function Formulario() {
 
                 {/* {error?'Si hay un error':'No hay error'} */}
                 {/* {error && "si hay error"} */}
-                {error && (
-                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mb-2" role="alert">
-                <p class="font-bold">Todos los campos son obligatorios!!</p>
-              </div>
-                )}
+                {error && <Error message='Todos los campos son obligatorios!!!'/>}
 
                 <div className="mb-5">
                     <label
