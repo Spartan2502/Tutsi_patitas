@@ -11,21 +11,30 @@ export default function Formulario({ pacientes, setPacientes }) {
 
     const [error, setError] = useState(false)
 
+    const generarID = () => {
+        const random = Math.random.toString(36).substr(2)
+        const date = Date.now().toString(36)
+        const id = random + date
+        const send = id.substr(33)
+        return send
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault()
         //validacion del formulario 
-        console.log('validando formulario')
         if ([nombre, propietario, email, fecha, sintomas].includes('')) {
-            console.log('hay almenos un campo vacio')
             setError(true)
         } else {
-            console.log('enviando formulario...')
             setError(false)
             //objeto de paciente
             const objetoPaciente = {
-                nombre, propietario, email, fecha, sintomas
+                nombre,
+                propietario,
+                email,
+                fecha,
+                sintomas,
+                id: generarID()
             }
-            console.log(objetoPaciente)
             //guardar los pacientes
             setPacientes([...pacientes, objetoPaciente])
 
@@ -57,7 +66,7 @@ export default function Formulario({ pacientes, setPacientes }) {
 
                 {/* {error?'Si hay un error':'No hay error'} */}
                 {/* {error && "si hay error"} */}
-                {error && <Error message='Todos los campos son obligatorios!!!'/>}
+                {error && <Error><p> Todos los campos son obligatorios!!!</p></Error>}
 
                 <div className="mb-5">
                     <label

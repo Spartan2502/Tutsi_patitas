@@ -1,26 +1,29 @@
 
-const Paciente = () => {
+const Paciente = (paciente) => {
+    const paciente1 = paciente.paciente
+    console.log(paciente1);
+    const {nombre,propietario, email, fecha, sintomas} = paciente1
     return (
         <div className="mx-5 my-5 bg-white shadow-md px-5 py-10 rounded-md">
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Nombre: {""}
-                <span className="font-normal normal-case">perro1</span>
+                <span className="font-normal normal-case">{nombre}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Propietario: {""}
-                <span className="font-normal normal-case">persona1</span>
+                <span className="font-normal normal-case">{propietario}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Email: {""}
-                <span className="font-normal normal-case">Correo@correo.com</span>
+                <span className="font-normal normal-case">{email}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">Fecha Alta: {""}
-                <span className="font-normal normal-case">10 febrero 2022</span>
+                <span className="font-normal normal-case">{fecha}</span>
             </p>
 
             <p className="font-bold mb-3 text-gray-700 uppercase">sintomas: {""}
-                <span className="font-normal normal-case">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil officia pariatur nobis eos excepturi odio soluta. Excepturi sapiente temporibus totam quam at omnis facere cupiditate voluptate? Delectus temporibus voluptate dignissimos!</span>
+                <span className="font-normal normal-case">{sintomas}</span>
             </p>
 
         </div>)
