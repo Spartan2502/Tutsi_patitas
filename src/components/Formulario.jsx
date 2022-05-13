@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Error } from './Error'
 
 
-export default function Formulario({ pacientes, setPacientes, paciente }) {
+export default function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
     const [nombre, setNombre] = useState('')
     const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
@@ -11,7 +11,19 @@ export default function Formulario({ pacientes, setPacientes, paciente }) {
 
     const [error, setError] = useState(false)
 
-    console.log(paciente)
+
+    useEffect(() => {
+        if (Object.keys(paciente).length > 0) {
+            setNombre(paciente.nombre)
+            setPropietario(paciente.propietario)
+            setEmail(paciente.email)
+            setFecha(paciente.fecha)
+            setSintomas(paciente.sintomas)
+
+        }
+    }, [paciente])
+
+
 
     const generarId = () => {
         const random = Math.random().toString(36).substr(2);
@@ -26,29 +38,48 @@ export default function Formulario({ pacientes, setPacientes, paciente }) {
         if ([nombre, propietario, email, fecha, sintomas].includes('')) {
             setError(true)
             return
-        } else {
-            setError(false)
-            //objeto de paciente
-            const objetoPaciente = {
-                nombre,
-                propietario,
-                email,
-                fecha,
-                sintomas,
-                id: generarId()
-            }
-            //guardar los pacientes
-            setPacientes([...pacientes, objetoPaciente])
+        }
 
-            //reiniciar el fomr
-            setNombre('')
-            setPropietario('')
-            setEmail('')
-            setFecha('')
-            setSintomas('')
 
+        setError(false)
+        //objeto de paciente
+        const objetoPaciente = {
+            nombre,
+            propietario,
+            email,
+            fecha,
+            sintomas,
 
         }
+
+        if (paciente.id) {
+            //editando el registro
+            objetoPaciente.id = paciente.id
+            //map va a buscar el objeto con el mismo ID que paciente.id si lo encuentra va a regresar el paciente actualizado sino va a mandar el objeto que ya teniamos
+            const pacientesActualizados = pacientes.map(pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+            //Seteamos los nuevo pacientes
+            setPacientes(pacientesActualizados)
+            setPaciente({})
+        }
+        else {
+            //nuevo registro
+            objetoPaciente.id = generarId()
+            //guardar los pacientes
+            setPacientes([...pacientes, objetoPaciente])
+        }
+
+
+
+
+        //reiniciar el fomr
+        setNombre('')
+        setPropietario('')
+        setEmail('')
+        setFecha('')
+        setSintomas('')
+
+
+
 
     }
 
@@ -141,7 +172,7 @@ export default function Formulario({ pacientes, setPacientes, paciente }) {
 
                     <input type="submit"
                         className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-700 cursor-pointer transition-all"
-                        value="Agregar paciente" />
+                        value={paciente.id ? 'Editar paciente' : 'Agregar paciente'} />
                 </div>
             </form>
         </div>

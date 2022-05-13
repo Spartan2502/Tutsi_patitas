@@ -1,6 +1,7 @@
 import Paciente from "./Paciente"
 
-function ListadoPacientes({pacientes, setPaciente}) {
+function ListadoPacientes({ pacientes, setPaciente, Eliminar }) {
+
     return (
         <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
 
@@ -14,11 +15,11 @@ function ListadoPacientes({pacientes, setPaciente}) {
 
                     {
                         pacientes.map((paciente) => (
-                            console.log(paciente.id),
                             <Paciente
                                 key={paciente.id}
                                 paciente={paciente}
                                 setPaciente={setPaciente}
+                                Eliminar={Eliminar}
                             />))}
                 </>)
                 :
