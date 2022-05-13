@@ -1,9 +1,8 @@
 
-const Paciente = (paciente, setPaciente) => {
-    const paciente1 = paciente.paciente
-    const { nombre, propietario, email, fecha, sintomas } = paciente1
+const Paciente = ({paciente, setPaciente}) => {
+    const { nombre, propietario, email, fecha, sintomas } = paciente
 
-    const click = (paciente1) => { setPaciente(paciente1) }
+    const click = (paciente) => { setPaciente(paciente) }
     return (
         <div className="mx-5 my-5 bg-white shadow-md px-5 py-10 rounded-md">
 

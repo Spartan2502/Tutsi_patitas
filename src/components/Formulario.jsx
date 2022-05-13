@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Error } from './Error'
 
 
-export default function Formulario({ pacientes, setPacientes }) {
+export default function Formulario({ pacientes, setPacientes, paciente }) {
     const [nombre, setNombre] = useState('')
     const [propietario, setPropietario] = useState('')
     const [email, setEmail] = useState('')
@@ -11,19 +11,21 @@ export default function Formulario({ pacientes, setPacientes }) {
 
     const [error, setError] = useState(false)
 
-    const generarID = () => {
-        const random = Math.random.toString(36).substr(2)
-        const date = Date.now().toString(36)
-        const id = random + date
-        const send = id.substr(33)
-        return send
+    console.log(paciente)
+
+    const generarId = () => {
+        const random = Math.random().toString(36).substr(2);
+        const fecha = Date.now().toString(36)
+        return random + fecha
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+
         //validacion del formulario 
         if ([nombre, propietario, email, fecha, sintomas].includes('')) {
             setError(true)
+            return
         } else {
             setError(false)
             //objeto de paciente
@@ -33,7 +35,7 @@ export default function Formulario({ pacientes, setPacientes }) {
                 email,
                 fecha,
                 sintomas,
-                id: generarID()
+                id: generarId()
             }
             //guardar los pacientes
             setPacientes([...pacientes, objetoPaciente])

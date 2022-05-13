@@ -1,12 +1,10 @@
 import Paciente from "./Paciente"
 
-function ListadoPacientes(pacientes, setPaciente) {
-    var pacientes1 = pacientes.pacientes
-
+function ListadoPacientes({pacientes, setPaciente}) {
     return (
         <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
 
-            {pacientes1 && pacientes1.length ? (
+            {pacientes && pacientes.length ? (
                 <>
                     <h2 className="font-black text-3xl text-center">ListadoPacientes</h2>
                     <p className="text-xl mt-5 mb-10 text-center">
@@ -15,7 +13,7 @@ function ListadoPacientes(pacientes, setPaciente) {
                     </p>
 
                     {
-                        pacientes1.map((paciente) => (
+                        pacientes.map((paciente) => (
                             console.log(paciente.id),
                             <Paciente
                                 key={paciente.id}
